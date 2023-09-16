@@ -18,12 +18,15 @@ Na pasta `ref` eu vou por o pdf dos artigos referência que mais me ajudaram a g
 
 O arquivo `requirements.txt` contém uma lista das bibliotecas instaladas no ambiente em que estou executando os códigos. Se você deseja executar o código em seu computador, siga as instruções fornecidas. Estou considerando que você utilize o Anaconda, que é bastante comum. No entanto, se estiver usando outro gerenciador de ambientes, pesquise os comandos equivalentes. Em resumo você deve:
 
-Se não possuir algum ambiente, crie ele e em seguida entre nesse ambiente via terminal com os comandos:
+ - Se não possuir algum ambiente, crie ele e em seguida entre nesse ambiente via terminal com os comandos:
+
     ``` 
     conda create --name novo_ambiente
     conda activate novo_ambiente
     ```
-Use meu arquivo `requirements.txt` para instalar as bibliotecas usando:
+
+ - Use meu arquivo `requirements.txt` para instalar as bibliotecas usando:
+
     ```
     conda install --file requirements.txt
     ```
