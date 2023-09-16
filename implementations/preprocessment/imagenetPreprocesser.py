@@ -62,4 +62,4 @@ def sample_imagenet_data(root_dir, output_dir, n_samples=100000, split_ratios=(0
     process_and_save(test_images, test_dir)
 
 # Exemplo de uso:
-# sample_imagenet_data('/path/to/imagenet', '/path/to/output', n_samples=100000)
+# sample_imagenet_data('/path/to/imagenet', '/path/to/ImageNet100k', n_samples=100000)
