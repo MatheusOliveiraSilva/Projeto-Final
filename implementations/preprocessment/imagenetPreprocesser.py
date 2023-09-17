@@ -3,7 +3,6 @@
 # diferente dos outros datasets, nem todas imagens são de dimensões iguais, e nem todas imagens são coloridas. Por isso, é necessário
 # um preprocessamento diferente para esse dataset.
 
-
 import os
 import random
 from PIL import Image
@@ -21,13 +20,15 @@ def sample_imagenet_data(root_dir, output_dir, n_samples=100000, split_ratios=(0
         target_size (tuple): Resolução desejada das imagens
     """
     
+    print("Iniciando o processamento das imagens...")
+    
     # Verifica os proporções
-    assert sum(split_ratios) == 1.0, "As proporções de treino, validação e teste devem somar 1.0"
+    assert abs(sum(split_ratios) - 1.0) < 1e-10, "As proporções de treino, validação e teste devem somar 1.0"
     
     # Cria os diretórios de saída
-    train_dir = os.path.join(output_dir, 'train')
-    val_dir = os.path.join(output_dir, 'val')
-    test_dir = os.path.join(output_dir, 'test')
+    train_dir = os.path.join(output_dir, 'train/all_images')
+    val_dir = os.path.join(output_dir, 'val/all_images')
+    test_dir = os.path.join(output_dir, 'test/all_images')
     for dir in [train_dir, val_dir, test_dir]:
         if not os.path.exists(dir):
             os.makedirs(dir)
@@ -39,8 +40,12 @@ def sample_imagenet_data(root_dir, output_dir, n_samples=100000, split_ratios=(0
             if file.endswith(('.JPEG', '.jpg', '.png')):
                 all_images.append(os.path.join(subdir, file))
     
+    print(f"Total de imagens encontradas: {len(all_images)}")
+    
     # Amostra aleatoriamente n_samples imagens
     sampled_images = random.sample(all_images, n_samples)
+    
+    print(f"Total de imagens amostradas: {len(sampled_images)}")
     
     # Divide as imagens nos conjuntos de treino, validação e teste
     n_train = int(n_samples * split_ratios[0])
@@ -52,14 +57,26 @@ def sample_imagenet_data(root_dir, output_dir, n_samples=100000, split_ratios=(0
     
     # Função auxiliar para redimensionar e salvar imagens
     def process_and_save(images, output_folder):
-        for img_path in images:
+        for idx, img_path in enumerate(images, 1):
             img = Image.open(img_path)
             img = img.resize(target_size)
             img.save(os.path.join(output_folder, os.path.basename(img_path)))
+            if idx % 100 == 0:
+                print(f"{idx} imagens processadas e salvas em {output_folder}")
     
     process_and_save(train_images, train_dir)
+    print(f"Imagens de treino processadas e salvas em {train_dir}")
+    
     process_and_save(val_images, val_dir)
+    print(f"Imagens de validação processadas e salvas em {val_dir}")
+    
     process_and_save(test_images, test_dir)
+    print(f"Imagens de teste processadas e salvas em {test_dir}")
 
-# Exemplo de uso:
-# sample_imagenet_data('/path/to/imagenet', '/path/to/ImageNet100k', n_samples=100000)
+    print("Processamento concluído!")
+
+
+path = r'E:\downloads\imagenet-object-localization-challenge\ILSVRC\Data\CLS-LOC\test'
+output_path = r'C:\Users\mathe\Desktop\facul\database-tcc\ImageNet100k'
+
+sample_imagenet_data(path, output_path, n_samples=1000)
