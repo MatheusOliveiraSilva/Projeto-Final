@@ -61,7 +61,7 @@ def sample_imagenet_data(root_dir, output_dir, n_samples=100000, split_ratios=(0
             img = Image.open(img_path)
             img = img.resize(target_size)
             img.save(os.path.join(output_folder, os.path.basename(img_path)))
-            if idx % 100 == 0:
+            if idx % 1000 == 0:
                 print(f"{idx} imagens processadas e salvas em {output_folder}")
     
     process_and_save(train_images, train_dir)
@@ -77,6 +77,6 @@ def sample_imagenet_data(root_dir, output_dir, n_samples=100000, split_ratios=(0
 
 
 path = r'E:\downloads\imagenet-object-localization-challenge\ILSVRC\Data\CLS-LOC\test'
-output_path = r'C:\Users\mathe\Desktop\facul\database-tcc\ImageNet100k'
+output_path = r'C:\Users\mathe\Desktop\facul\database-tcc\ImageNet200k'
 
-sample_imagenet_data(path, output_path, n_samples=1000)
+sample_imagenet_data(path, output_path, n_samples=200000)
