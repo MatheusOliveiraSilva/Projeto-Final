@@ -77,6 +77,6 @@ def sample_imagenet_data(root_dir, output_dir, n_samples=100000, split_ratios=(0
 
 
 path = r'E:\downloads\imagenet-object-localization-challenge\ILSVRC\Data\CLS-LOC\test'
-output_path = r'C:\Users\mathe\Desktop\facul\database-tcc\ImageNet200k'
+output_path = r'C:\Users\mathe\Desktop\facul\database-tcc\ImageNet1k'
 
-sample_imagenet_data(path, output_path, n_samples=200000)
+sample_imagenet_data(path, output_path, n_samples=1000)
